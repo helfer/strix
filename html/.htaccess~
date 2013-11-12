@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on	
+	RewriteBase /
+
+
+	RewriteCond %{HTTP_HOST} ^(www\.)?(ibocms|pspace|ibosuisse)\.ch$
+	RewriteCond %{REQUEST_URI} ^/$
+	RewriteRule ^(index.php)?$ /SBO/ [QSA,R,L]
+
+	#just redirects everything to index.php which will handle the rest
+	RewriteCond %{HTTP_HOST} ^(www\.)?(ibosuisse|ibocms|pspace)\.ch$
+	RewriteCond %{REQUEST_URI} !^/webcontent/(.*)$
+	RewriteCond %{REQUEST_URI} !^/volley(.*)$
+	RewriteCond %{REQUEST_URI} !^/wiki/(.*)$
+	RewriteCond %{REQUEST_URI} !^/forum/(.*)$
+	RewriteCond %{REQUEST_URI} !^/gallery/(.*)$
+	RewriteCond %{REQUEST_URI} !^/robots.txt$
+	RewriteCond %{REQUEST_URI} !^/favicon.ico$
+	RewriteRule ^(.+)  index.php [QSA]
+
+
+
+</IfModule>
